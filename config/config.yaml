@@ -1,0 +1,24 @@
+
+# Domain for dnsserver IEPEE service.
+# You should set NS record as this dnsserver
+DOMAIN: iep.ee
+
+DEFAULT_IP: 34.97.56.155
+
+DNS_PORT: 53
+
+SOA:
+  MNAME: ns.iep.ee
+  RNAME: me.billo.io
+  SERIAL: 2020021601
+  REFRESH:
+  RETRY:
+  EXPIRE:
+  MINIMUM:
+  VALUE:
+
+NSS:
+  - ns1.iep.ee: 34.97.56.155
+  - ns2.iep.ee: 34.97.56.155
+
+WEB_PORT:
