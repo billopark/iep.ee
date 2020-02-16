@@ -6,28 +6,28 @@ import (
 	"net"
 )
 
-func BuildA(query string, ip net.IP) (dns.RR, error) {
+func BuildAAAA(query string, ip net.IP) (dns.RR, error) {
 	if ip == nil {
-		ip = buildIPv4(query)
+		ip = buildIPv6(query)
 	}
 	if ip == nil {
 		return nil, errors.New("No proper ip found.\n")
 	}
 
-	var ipv4 net.IP
+	var ipv6 net.IP
 
-	if ipv4 = ip.To4(); ipv4 == nil {
+	if ipv6 = ip.To16(); ipv6 == nil {
 		return nil, errors.New("No proper ip found.\n")
 	}
 
-	return &dns.A{
+	return &dns.AAAA{
 		Hdr: dns.RR_Header{
 			Name:   query,
-			Rrtype: dns.TypeA,
+			Rrtype: dns.TypeAAAA,
 			Class:  dns.ClassINET,
 			Ttl:    0,
 		},
-		A: ipv4,
+		AAAA: ipv6,
 	}, nil
 
 }

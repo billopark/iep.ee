@@ -9,12 +9,14 @@ import (
 )
 
 type Config struct {
-	Domain    string            `mapstructure:"DOMAIN"`
-	DnsPort   uint16            `mapstructure:"DNS_PORT"`
-	DefaultIP string            `mapstructure:"DEFAULT_IP"`
-	SOA       SOAConfig         `mapstructure:"SOA"`
-	Nss       map[string]string `mapstructure:"NSS"`
-	WebPort   uint16            `mapstructure:"WEB_PORT"`
+	Domain      string            `mapstructure:"DOMAIN"`
+	DomainIP    string            `mapstructure:"DOMAIN_IP"`
+	DnsPort     uint16            `mapstructure:"DNS_PORT"`
+	DefaultIPv4 string            `mapstructure:"DEFAULT_IPV4"`
+	DefaultIPv6 string            `mapstructure:"DEFAULT_IPV6"`
+	SOA         SOAConfig         `mapstructure:"SOA"`
+	Nss         map[string]string `mapstructure:"NSS"`
+	WebPort     uint16            `mapstructure:"WEB_PORT"`
 }
 
 type SOAConfig struct {

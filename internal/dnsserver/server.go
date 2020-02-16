@@ -17,6 +17,16 @@ func handleNS(m *dns.Msg) {
 	}
 }
 
+func handleSOA(m *dns.Msg) error {
+	soa, err := record.BuildSOA()
+	if err != nil {
+		return err
+	}
+	m.Answer = append(m.Answer, soa)
+	m.Extra = append(m.Extra, record.BuildTXT())
+	return nil
+}
+
 func handler(w dns.ResponseWriter, r *dns.Msg) {
 	m := new(dns.Msg)
 	m.SetReply(r)
@@ -30,22 +40,30 @@ func handler(w dns.ResponseWriter, r *dns.Msg) {
 		handleNS(m)
 		m.Extra = append(m.Extra, record.BuildTXT())
 
-	default:
-		fallthrough
-	case dns.TypeAAAA, dns.TypeA:
+	case dns.TypeA, dns.TypeNone:
 		rr, err := record.BuildA(r.Question[0].Name, nil)
 		if err != nil {
-			return
+			if err = handleSOA(m); err != nil {
+				return
+			}
+		} else {
+			m.Answer = append(m.Answer, rr)
 		}
-		m.Answer = append(m.Answer, rr)
-
-	case dns.TypeSOA:
-		soa, err := record.BuildSOA()
+	case dns.TypeAAAA:
+		rr, err := record.BuildAAAA(r.Question[0].Name, nil)
 		if err != nil {
+			if err = handleSOA(m); err != nil {
+				return
+			}
+		} else {
+			m.Answer = append(m.Answer, rr)
+		}
+	default:
+		fallthrough
+	case dns.TypeSOA:
+		if err := handleSOA(m); err != nil {
 			return
 		}
-		m.Answer = append(m.Answer, soa)
-		m.Extra = append(m.Extra, record.BuildTXT())
 	}
 
 	log.Println(m)
