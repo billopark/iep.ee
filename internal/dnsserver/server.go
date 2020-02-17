@@ -23,7 +23,6 @@ func handleSOA(m *dns.Msg) error {
 		return err
 	}
 	m.Answer = append(m.Answer, soa)
-	m.Extra = append(m.Extra, record.BuildTXT())
 	return nil
 }
 

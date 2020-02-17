@@ -13,7 +13,7 @@ DNS_PORT: 53
 SOA:
   MNAME: ns.iep.ee
   RNAME: me.billo.io
-  SERIAL: 2020021700
+  SERIAL: 2020021701
   REFRESH:
   RETRY:
   EXPIRE:
