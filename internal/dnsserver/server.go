@@ -42,18 +42,18 @@ func handler(w dns.ResponseWriter, r *dns.Msg) {
 	case dns.TypeA, dns.TypeNone:
 		rr, err := record.BuildA(r.Question[0].Name, nil)
 		if err != nil {
-			if err = handleSOA(m); err != nil {
-				return
-			}
+			rr, err = record.BuildSOA()
+			m.Ns = append(m.Ns, rr)
+			m.Rcode = dns.RcodeNameError
 		} else {
 			m.Answer = append(m.Answer, rr)
 		}
 	case dns.TypeAAAA:
 		rr, err := record.BuildAAAA(r.Question[0].Name, nil)
 		if err != nil {
-			if err = handleSOA(m); err != nil {
-				return
-			}
+			rr, err = record.BuildSOA()
+			m.Ns = append(m.Ns, rr)
+			m.Rcode = dns.RcodeNameError
 		} else {
 			m.Answer = append(m.Answer, rr)
 		}
