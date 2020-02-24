@@ -15,7 +15,10 @@ Parsed IP will be A record of that domain.
 For example, `10.0.0.1.iep.ee` will be splited into `10, 0, 0, 1` which means `10.0.0.1`.
 So `10.0.0.1.iep.ee` 's A Record is `10.0.0.1`.
 
-Common Use-case
+[Try it now](https://toolbox.googleapps.com/apps/dig/#A/10.0.0.1.iep.ee)
+
+
+#### Common Use-case
 
 `10.0.0.1.iep.io` will be mapped to `10.0.0.1`
 
@@ -24,6 +27,13 @@ Common Use-case
 `10-0.0-1.iep.io` will be mapped to `10.0.0.1`
 
 `a-b-c-10-0-0-1.iep.io` will be mapped to `10.0.0.1`
+
+
+#### Why it is useful?
+
+This service is needed when you need domains for local server. (For cookie or etc.) 
+Traditionally, you need to modify your hosts file. But with this service, you don't need it.
+
 
 Contribution
 ---
