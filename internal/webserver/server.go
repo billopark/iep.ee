@@ -38,6 +38,8 @@ func Start(halt chan bool) {
 		<-halt
 		if err := srv.Shutdown(context.Background()); err != nil {
 			panic(err)
+		} else {
+			log.Println("Web Server halted")
 		}
 	}()
 
