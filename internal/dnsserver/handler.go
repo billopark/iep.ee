@@ -4,14 +4,17 @@ import (
 	"github.com/billopark/iep.ee/config"
 	"github.com/billopark/iep.ee/internal/record"
 	"github.com/miekg/dns"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"net"
 )
 
 func handleA(m *dns.Msg, req *dns.Msg) {
 	rr, err := record.BuildA(req.Question[0].Name, nil)
 	if err != nil {
-		_ = handleNX(m)
+		err = handleNX(m)
+		if err != nil {
+			log.Warnln(err)
+		}
 	} else {
 		m.Answer = append(m.Answer, rr)
 	}
@@ -20,7 +23,10 @@ func handleA(m *dns.Msg, req *dns.Msg) {
 func handleAAAA(m *dns.Msg, req *dns.Msg) {
 	rr, err := record.BuildAAAA(req.Question[0].Name, nil)
 	if err != nil {
-		_ = handleNX(m)
+		err = handleNX(m)
+		if err != nil {
+			log.Warnln(err)
+		}
 	} else {
 		m.Answer = append(m.Answer, rr)
 	}
@@ -41,6 +47,7 @@ func handleNS(m *dns.Msg) {
 func handleSOA(m *dns.Msg) {
 	soa, err := record.BuildSOA()
 	if err != nil {
+		log.Warnln(err)
 		return
 	}
 	m.Answer = append(m.Answer, soa)
@@ -77,9 +84,9 @@ func handler(w dns.ResponseWriter, r *dns.Msg) {
 		handleSOA(m)
 	}
 
-	log.Println(m)
+	log.Infoln(m)
 	err := w.WriteMsg(m)
 	if err != nil {
-		log.Println(err)
+		log.Warnln(err)
 	}
 }
