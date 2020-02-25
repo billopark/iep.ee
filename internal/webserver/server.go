@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/billopark/iep.ee/config"
 	"github.com/gorilla/mux"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"net/http"
 	"time"
 )
@@ -30,7 +30,7 @@ func Start(halt chan bool) {
 
 	go func() {
 		if err := srv.ListenAndServe(); err != nil {
-			log.Println(err)
+			log.Infoln(err)
 		}
 	}()
 
@@ -39,7 +39,7 @@ func Start(halt chan bool) {
 		if err := srv.Shutdown(context.Background()); err != nil {
 			panic(err)
 		} else {
-			log.Println("Web Server halted")
+			log.Infoln("Web Server halted")
 		}
 	}()
 

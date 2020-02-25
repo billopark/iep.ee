@@ -1,10 +1,9 @@
 package config
 
 import (
-	"fmt"
 	"github.com/miekg/dns"
+	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
-	"log"
 	"sync"
 )
 
@@ -60,7 +59,7 @@ func Get() *Config {
 		viper.SetConfigType("yaml")
 		err := viper.ReadInConfig() // FindAll and read the config file
 		if err != nil {             // Handle errors reading the config file
-			panic(fmt.Errorf("Fatal error config file: %s \n", err))
+			log.Fatalf("Fatal error config file: %s \n", err)
 		}
 
 		err = viper.Unmarshal(config)

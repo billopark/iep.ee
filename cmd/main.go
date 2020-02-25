@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"github.com/billopark/iep.ee/internal/dnsserver"
+	_ "github.com/billopark/iep.ee/internal/log"
 	"github.com/billopark/iep.ee/internal/webserver"
-	"log"
+	log "github.com/sirupsen/logrus"
 	"os"
 	"os/signal"
 	"syscall"
@@ -13,17 +13,17 @@ import (
 func main() {
 	dnsHalt := make(chan bool)
 	dnsserver.Start(dnsHalt)
-	log.Println("DNS Server started")
+	log.Infoln("DNS Server started")
 
 	webHalt := make(chan bool)
 	webserver.Start(webHalt)
-	log.Println("Web Server started")
+	log.Infoln("Web Server started")
 
 	sig := make(chan os.Signal)
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM)
 	s := <-sig
 
-	fmt.Printf("Signal (%s) received, stopping\n", s)
+	log.Infof("Signal (%s) received, stopping\n", s)
 	dnsHalt <- true
 	webHalt <- true
 }

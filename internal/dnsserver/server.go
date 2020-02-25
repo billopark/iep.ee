@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/billopark/iep.ee/config"
 	"github.com/miekg/dns"
-	"log"
+	log "github.com/sirupsen/logrus"
 )
 
 func Start(halt chan bool) {
@@ -25,7 +25,7 @@ func Start(halt chan bool) {
 		if err := server.Shutdown(); err != nil {
 			panic(err)
 		} else {
-			log.Println("DNS Server halted")
+			log.Infoln("DNS Server halted")
 		}
 	}()
 
