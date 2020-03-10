@@ -20,13 +20,13 @@ So `10.0.0.1.iep.ee` 's A Record is `10.0.0.1`.
 
 #### Common Use-case
 
-`10.0.0.1.iep.io` will be mapped to `10.0.0.1`
+`10.0.0.1.iep.ee` will be mapped to `10.0.0.1`
 
-`a.b.c.10.0.0.1.iep.io` will be mapped to `10.0.0.1`
+`a.b.c.10.0.0.1.iep.ee` will be mapped to `10.0.0.1`
 
-`10-0.0-1.iep.io` will be mapped to `10.0.0.1`
+`10-0.0-1.iep.ee` will be mapped to `10.0.0.1`
 
-`a-b-c-10-0-0-1.iep.io` will be mapped to `10.0.0.1`
+`a-b-c-10-0-0-1.iep.ee` will be mapped to `10.0.0.1`
 
 
 #### Why it is useful?
