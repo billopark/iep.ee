@@ -1,7 +1,7 @@
 # iep.ee
 
 ---
-[iep.ee](http://iep.ee) (sounds like `a-i-pi-i-i`) is simple DNS wildcard service.
+iep.ee (sounds like `a-i-pi-i-i`) is simple DNS wildcard service.
 It was written in Go.
 
 
