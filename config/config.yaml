@@ -3,7 +3,7 @@
 # You should set NS record as this dnsserver
 DOMAIN: iep.ee
 
-DOMAIN_IP: 34.97.56.155
+DOMAIN_IP: 3.34.113.218
 
 DEFAULT_IPV4:
 DEFAULT_IPV16:
@@ -13,7 +13,7 @@ DNS_PORT: 53
 SOA:
   MNAME: ns.iep.ee
   RNAME: me.billo.io
-  SERIAL: 2020022400
+  SERIAL: 2021042300
   REFRESH:
   RETRY:
   EXPIRE:
@@ -21,7 +21,7 @@ SOA:
   VALUE:
 
 NSS:
-  - ns1.iep.ee: 34.97.56.155
-  - ns2.iep.ee: 34.97.56.155
+  - ns1.iep.ee: 3.34.113.218
+  - ns2.iep.ee: 3.34.113.218
 
 WEB_PORT:
